@@ -23,4 +23,13 @@ class IndexPage extends Controller {
         ));
     }
 
+    public function addAction() {
+        $this->render('add.html', array(
+            'kk'=>22,
+            'vv'=>'33',
+            'test'=>'testPage',
+            'desc'=>'页面变量都在这个$this里面',
+        ));
+    }
+
 }

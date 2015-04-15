@@ -8,8 +8,8 @@
 class MysqlConf {
 
     //库名
-    const MASTER = 'test';
-    const SLAVE = 'test';
+    const MASTER = 'sail2doc';
+    const SLAVE = 'sail2doc';
 
     /**
      * 主库配置

@@ -1,0 +1,110 @@
+<?php
+$info = $this->info;
+?>
+<div class="wiki_bodyContent" id="bodyContent">
+<div lang="zh-cn" dir="ltr" class="mw-content-ltr">
+    <h1 class="wiki_title"> <span class="mw-headline"><?php echo $this->info['title'];?></span></h1>
+    <p><?php echo $this->info['title'];?></p>
+
+
+    <h2 class="wiki_title"> <span class="mw-headline" id="URL">URL</span></h2>
+    <p><span style="text-transform:lowercase;font-weight:600"><a rel="nofollow" class="external free" href="<?php echo $info['url'];?>"><?php echo $info['url'];?></a></span></p>
+
+    <h2 class="wiki_title"> <span class="mw-headline">HTTP请求方式</span></h2>
+    <p><span style="text-transform:uppercase;font-weight:600"><?php echo $info['type'];?></span></p>
+
+    <h2 class="wiki_title"> <span class="mw-headline">是否需要登录</span></h2>
+
+<?php
+if( $info['is_login'] ) {
+    echo '<p><span style="text-transform:lowercase;font-weight:600">是</span><br /> 关于登录授权，参见 <a href="/" >授权登录</a></p>';
+}else{
+    echo '<p><span style="text-transform:lowercase;font-weight:600">否</span></p>';
+}
+?>
+
+
+<h2 class="wiki_title"> <span class="mw-headline" >请求参数</span></h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;">
+<tr>
+    <th width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">&#160; </th>
+    <th width="5%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">必选 </th>
+    <th width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">类型及范围 </th>
+    <th width="75%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">说明 </th>
+</tr>
+
+
+<?php
+
+foreach( $info['params'] as $p ) {
+echo '
+<tr>
+    <td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">' . $p['name'] . '</td>
+    <td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">' . ($p['need']? '是' : '否') . '</td>
+    <td style="text-align:left;padding-left:5px;border:1px solid #cccccc">' . $p['type'] . '</td>
+    <td style="text-align:left;padding-left:5px;border:1px solid #cccccc">' . $p['desc'] . '</td>
+</tr>';
+}
+?>
+</table>
+
+
+
+<h2 class="wiki_title"> <span class="mw-headline">注意事项</span></h2>
+<p>无</p>
+
+
+<h2 class="wiki_title"> <span class="mw-headline">调用样例及调试工具</span></h2>
+<p><a rel="nofollow" class="external text" href="">API测试工具，暂不可用</a></p>
+
+
+<h2 class="wiki_title"> <span class="mw-headline">返回结果 </span></h2>
+<div class="code_type" style="text-transform:uppercase;margin-bottom:5px;">JSON示例</div><br />
+<pre>
+<?php echo $info['ret_demo']; ?>
+</pre><br />
+
+
+<h2 class="wiki_title"> <span class="mw-headline">返回字段说明</span></h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;">
+<tr>
+    <th width="25%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">返回值字段 </th>
+    <th width="15%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">字段类型 </th>
+    <th width="60%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">字段说明 </th>
+</tr>
+
+
+<?php
+foreach( $info['ret'] as $v ) {
+echo '
+<tr>
+    <td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">' . $v['name'] . '</td>
+    <td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">' . $v['type'] . '</td>
+    <td style="text-align:left;padding-left:5px;border:1px solid #cccccc">' . $v['desc'] . '</td>
+</tr>';
+}
+?>
+</table>
+
+
+<h2 class="wiki_title"> <span class="mw-headline" id=".E5.85.B6.E4.BB.96">其他</span></h2>
+<p>无</p>
+
+
+
+<p><br />
+<!--@SHOWGRADE-->
+</p><p><br />
+<!--@NOBTNS--><!--@NOHEADING-->
+</p><p><br />
+<!--@SHOWGRADE-->
+</p>
+
+
+</div>
+<div class="wiki_plus_area_bottom"> 文档创建于：<?php echo date('Y-m-d H:i', $info['update_time']);?>，更新时间: <?php echo date('Y-m-d H:i', $info['update_time']);?></div>						
+
+</div>
+
+
+

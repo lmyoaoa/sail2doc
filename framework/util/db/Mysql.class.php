@@ -55,6 +55,7 @@ class Mysql {
         $data = $this->_formatValue($array);
 
         $sql = 'insert into `' . $this->tableName . '` set ' . $data['str'];
+        echo $sql;
         $sth = $conn->prepare($sql);
         $res = $sth->execute($data['data']);
         //$arr = $sth->errorInfo(); print_r($arr);

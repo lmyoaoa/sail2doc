@@ -6,6 +6,7 @@
   <meta name="renderer" content="webkit"> 
   <title>添加项目 - 禅道</title>
 <link rel='stylesheet' href='/tmp/zh-cn.default.css?v=7.0' type='text/css' media='screen' />
+<script src="/tmp/jquery.js"></script>
 <style>.mgr-5px{margin-right:5px;}
 #tipsModal {margin-top: 10%;}
 #begin + .input-group-addon {border-left: none; border-right: none;}
@@ -22,6 +23,7 @@
 #copyProjectModal a.cancel {color: #D2322D}
 
 .modal-dialog {margin-top: 10%!important;}
+.input-group {margin-top:3px;}
 </style><link rel='icon' href='/favicon.ico' type='image/x-icon' />
 <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
 </head>
@@ -92,121 +94,117 @@
   <div id='titlebar'>
     <div class='heading'>
       <span class='prefix'><i class='icon-folder-close-alt'></i></span>
-      <strong><small class='text-muted'><i class='icon icon-plus'></i></small> 添加项目</strong>
-    </div>
-    <div class='actions'>
-      <button class='btn' id='cpmBtn'><i class='icon-copy'></i> 复制项目</button>
+      <strong><small class='text-muted'><i class='icon icon-plus'></i></small> 添加文档</strong>
     </div>
   </div>
   <form class='form-condensed' method='post' target='hiddenwin' id='dataform'>
     <table class='table table-form'> 
       <tr>
-        <th class='w-90px'>项目名称</th>
-        <td class='w-p25-f'><input type='text' name='name' id='name' value='' class='form-control' />
+        <th class='w-90px'>接口名称</th>
+        <td class='w-p25-f'><input type='text' name='title' id='title' value='' class='form-control' />
 </td><td></td>
       </tr>
       <tr>
-        <th>项目代号</th>
-        <td><input type='text' name='code' id='code' value='' class='form-control' />
+        <th>接口地址</th>
+        <td><input type='text' name='url' id='url' value='' class='form-control' />
 </td>
-      </tr>  
-      <tr>
-        <th>起始日期</th>
-        <td>
-          <div class='input-group'>
-            <input type='text' name='begin' id='begin' value='2015-04-15' class='form-control w-100px form-date' onchange='computeWorkDays()' placeholder='开始日期' />
-            <span class='input-group-addon'>至</span>
-            <input type='text' name='end' id='end' value='' class='form-control form-date' onchange='computeWorkDays()' placeholder='结束日期' />
-          </div>
-        </td>
-        <td>
-          &nbsp; &nbsp; <label class='radio-inline'><input type='radio' name='delta' value='7' onclick='computeEndDate(this.value)' id='delta7' /> 一星期</label><label class='radio-inline'><input type='radio' name='delta' value='14' onclick='computeEndDate(this.value)' id='delta14' /> 两星期</label><label class='radio-inline'><input type='radio' name='delta' value='31' onclick='computeEndDate(this.value)' id='delta31' /> 一个月</label><label class='radio-inline'><input type='radio' name='delta' value='62' onclick='computeEndDate(this.value)' id='delta62' /> 两个月</label><label class='radio-inline'><input type='radio' name='delta' value='93' onclick='computeEndDate(this.value)' id='delta93' /> 三个月</label><label class='radio-inline'><input type='radio' name='delta' value='186' onclick='computeEndDate(this.value)' id='delta186' /> 半年</label><label class='radio-inline'><input type='radio' name='delta' value='365' onclick='computeEndDate(this.value)' id='delta365' /> 一年</label>        </td>
       </tr>
+
       <tr>
-        <th>可用工作日</th>
-        <td>
-          <div class='input-group'>
-          <input type='text' name='days' id='days' value='' class='form-control' />
-            <span class='input-group-addon'>天</span>
-          </div>
-        </td>
-      </tr>  
-      <tr>
-        <th>团队名称</th>
-        <td><input type='text' name='team' id='team' value='' class='form-control' />
-</td>
-      </tr>  
-      <tr>
-        <th>项目类型</th>
+        <th>接口类型</th>
         <td>
           <select name='type' id='type' class='form-control'>
-<option value='sprint'>短期迭代</option>
-<option value='waterfall'>长期项目</option>
-<option value='ops'>运维项目</option>
-</select>
+            <option value='post'>post</option>
+            <option value='get'>GET</option>
+          </select>
         </td>
         <td>
-          <div class='help-block'>运维项目禁用燃尽图和需求。</div>
         </td>
       </tr>
+
       <tr>
-        <th>关联产品</th>
-        <td class='text-left' id='productsBox' colspan="2"><select name='products[]' id='products' class='form-control chosen' data-placeholder='选择产品关联...' multiple>
-<option value='1'>公司企业网站建设</option>
-<option value='2'>企业内部工时管理系统</option>
-</select>
-</td>
+        <th>是否需要登录</th>
+        <td>
+          <select name='type' id='type' class='form-control'>
+            <option value='1'>是</option>
+            <option value='0'>否</option>
+          </select>
+        </td>
+        <td>
+        </td>
       </tr>
+
       <tr>
-        <th>项目描述</th>
-        <td colspan='2'><textarea name='desc' id='desc' rows='6' class='form-control'></textarea>
-</td>
-      </tr>  
-      <tr>
-        <th>访问控制</th>
-        <td colspan='2'><div class='radio'><label><input type='radio' name='acl' value='open'  checked ='checked'onclick='setWhite(this.value);' id='aclopen' /> 默认设置(有项目视图权限，即可访问)</label></div><div class='radio'><label><input type='radio' name='acl' value='private' onclick='setWhite(this.value);' id='aclprivate' /> 私有项目(只有项目团队成员才能访问)</label></div><div class='radio'><label><input type='radio' name='acl' value='custom' onclick='setWhite(this.value);' id='aclcustom' /> 自定义白名单(团队成员和白名单的成员可以访问)</label></div></td>
-      </tr>  
-      <tr id='whitelistBox' class='hidden'>
-        <th>分组白名单</th>
-        <td colspan='2'><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='1'  id='whitelist1' /> 管理员</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='2'  id='whitelist2' /> 研发</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='3'  id='whitelist3' /> 测试</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='4'  id='whitelist4' /> 项目经理</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='5'  id='whitelist5' /> 产品经理</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='6'  id='whitelist6' /> 研发主管</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='7'  id='whitelist7' /> 产品主管</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='8'  id='whitelist8' /> 测试主管</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='9'  id='whitelist9' /> 高层管理</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='10'  id='whitelist10' /> 其他</label><label class='checkbox-inline'><input type='checkbox' name='whitelist[]' value='11'  id='whitelist11' /> guest</label></td>
+        <th>请求参数</th>
+        <td id="paramsDiv">
+          <div class='input-group' data-num="1">
+            <span class='input-group-addon'>参数1</span>
+            <input type='text' name='param[name][]' value="" class='form-control w-100px form-date' placeholder='参数名' />
+            <input type='text' name='param[need][]' value="" class='form-control w-100px form-date' placeholder='必填，不写为非必填，必填请写1' />
+            <input type='text' name='param[type][]' value='' class='form-control form-date' placeholder='类型' />
+            <input type='text' name='param[desc][]' value='' class='form-control form-date' placeholder='字段说明' />
+          </div>
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addParam();">添加参数</a>
+        </td>
       </tr>
+
+<script>
+function addParam() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">参数</span>\
+            <input type="text" name="param[name][]" value="" class="form-control w-100px form-date" placeholder="参数名" />\
+            <input type="text" name="param[need][]" value="" class="form-control w-100px form-date" placeholder="必填，不写为非必填，必填请写1" />\
+            <input type="text" name="param[type][]" value="" class="form-control form-date" placeholder="类型" />\
+            <input type="text" name="param[desc][]" value="" class="form-control form-date" placeholder="字段说明" />\
+          </div>';
+    $(str).appendTo('#paramsDiv');
+}
+
+function addReturn() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">字段1</span>\
+            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />\
+            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />\
+            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />\
+          </div>';
+    $(str).appendTo('#returnDiv');
+}
+</script>
+
+      <tr>
+        <th>数据返回demo</th>
+            <td colspan='2'><textarea name='desc' id='desc' rows='6' style="height:200px;" class='form-control'></textarea></td>
+      </tr>
+
+      <tr>
+        <th>返回字段说明</th>
+        <td id="returnDiv">
+          <div class='input-group' data-num="1">
+            <span class="input-group-addon">字段1</span>
+            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />
+            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />
+            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />
+          </div>
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addReturn();">添加字段</a>
+        </td>
+      </tr>
+
       <tr>
         <td></td><td colspan='2' class='text-center'> <button type='submit' id='submit'  class='btn btn-submit btn-primary'>保存</button><a href='javascript:history.go(-1);' class='btn btn-back'  >返回</a></td>
       </tr>
     </table>
   </form>
 </div>
-<div class='modal fade' id='copyProjectModal'>
-  <div class='modal-dialog mw-800px'>
-    <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal'>&times;</button>
-      <h4 class='modal-title' id='myModalLabel'>请选择一个项目来复制</h4>
-    </div>
-    <div class='modal-body'>
-            <div id='copyProjects' class='row'>
-                                              <div class='col-md-4 col-sm-6'><a href='javascript:;' data-id='2' class='nobr '><i class='icon-folder-close-alt text-muted'></i> 企业网站第二期</a></div>
-                          <div class='col-md-4 col-sm-6'><a href='javascript:;' data-id='3' class='nobr '><i class='icon-folder-close-alt text-muted'></i> 273业管系统</a></div>
-                          <div class='col-md-4 col-sm-6'><a href='javascript:;' data-id='1' class='nobr '><i class='icon-folder-close-alt text-muted'></i> 企业网站第一期</a></div>
-                  </div>
-          </div>
-  </div>
-</div>
   </div>  
     
-  <div id='divider'></div>
-  <iframe frameborder='0' name='hiddenwin' id='hiddenwin' scrolling='no' class='debugwin hidden'></iframe>
-</div><div id='footer'>
-  <div id="crumbs">
-    <a href='/index.php?m=my&f=index' >禅道</a>
-&nbsp;<i class="icon-angle-right"></i>&nbsp;<a href='/index.php?m=project&f=index' >项目</a>
-&nbsp;<i class="icon-angle-right"></i>&nbsp;添加项目  </div>
-  <div id="poweredby">
-  <a href='http://www.zentao.net' target='_blank' class='text-primary'><i class='icon-zentao'></i> 禅道7.0</a> &nbsp;
-    <a href='http://api.zentao.net/goto.php?item=proversion&from=footer' target='_blank' id='proLink' class='text-important'><i class='text-danger icon-reply icon-rotate-90'></i> 专业版！</a> &nbsp;         <a href='javascript:;' target='' class='qrCode ' id='qrcodeBtn' title='手机访问'><i class='icon-qrcode'></i></a>
-<div class='popover top' id='qrcodePopover'><div class='arrow'></div><h3 class='popover-title'>手机访问</h3><div class='popover-content'><img src="javascript:;"></div></div>
-
-
 </div>
+
+<div id='footer'>
+
 </div>
 
 </body>

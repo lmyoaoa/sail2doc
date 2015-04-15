@@ -1,0 +1,84 @@
+<?php include ROOT_PATH . 'templates/app/head.html';?>
+
+<!--主内容开始-->
+<div class="wiki_wrap">
+	<div class="wiki_con">
+    	<div class="con_box">
+        	<div class="header noprint">
+            	<a href="/" title="开发文档" class="wiki_logo">开发文档</a>
+            </div>
+            <div class="wiki_body">
+            	<div class="wiki_inner">
+					                	<div class="main_content clearfix">
+                		<div class="wiki_side noprint">
+                        	<!--左侧导航-->
+							<div id="pl_web_wikiNav" class="wiki_nav">
+                                <form class="nav_search clearfix" action="/wiki/index.php">
+                                    <input type="hidden" name="title" value="特殊:搜索"/>
+                                    <span class="input_wrap"><input name="search" title="在微博API中搜索 [f]" accesskey="f" class="ser_input" node-txt="搜索" node-type="search" /></span>
+                                    <input type="submit" name="fulltext" value="搜索" title="搜索含这些文字的页面" class="search_btn" />                                </form>
+                                <ul class="nav_list">
+									<li class="n_top ">
+	<h3 action-type="folder"><a href="/"><em class="wiki_icon icon_首页"></em><span class="txt">首页</span>	</a></h3></li>
+	<li class="n_top ">
+	    <h3 action-type="folder"><a href="/wiki/%E5%B9%B3%E5%8F%B0%E5%85%AC%E5%91%8A"><em class="wiki_icon icon_平台公告"></em><span class="txt">平台公告</span></a></h3>	
+    </li>
+
+	<li class="n_top ">
+	<h3 action-type="folder"><a href ="#" onclick="return false;"><em
+		class="wiki_icon icon_wkDoc"></em><span class="txt">微博API</span><em class="nav_arr"></em>	</a></h3>	<ul class="child_list" style="display:none;"><li id="n-.E5.BE.AE.E5.8D.9AAPI" class="n_sub"><a href="/wiki/%E5%BE%AE%E5%8D%9AAPI">微博API</a></li><li id="n-API.E6.9B.B4.E6.96.B0.E6.97.A5.E5.BF.97" class="n_sub"><a href="/wiki/API%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">API更新日志</a></li><li id="n-.E6.8E.A5.E5.8F.A3.E8.AE.BF.E9.97.AE.E9.A2.91.E6.AC.A1.E6.9D.83.E9.99.90" class="n_sub"><a href="/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BF%E9%97%AE%E9%A2%91%E6%AC%A1%E6%9D%83%E9%99%90">接口访问频次权限</a></li><li id="n-.E6.96.B0.E7.89.88.E6.8E.A5.E5.8F.A3.E8.BF.81.E7.A7.BB.E6.8C.87.E5.8D.97" class="n_sub"><a href="/wiki/V1_To_V2">新版接口迁移指南</a></li>	</ul>	</li>
+	<li class="n_top ">
+	<h3 action-type="folder"><a href="/wiki/%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC"><em
+		class="wiki_icon icon_Contact"></em><span class="txt">联系我们</span></a></h3>	</li>
+	<li class="n_top" id="p-tb">
+		<h3><em class="wiki_icon icon_wkQus"></em><span class="txt">工具箱</span><em class="nav_arr"></em></h3>
+		<ul class="child_list" style="background:none">
+            <li id="t-whatlinkshere" class="n_sub"><a href="/">链入页面</a></li>
+        </ul>
+	</li>
+								</ul>
+								<ul class="quick_nav">
+									                                </ul>
+							</div>
+                            <!--/左侧导航结束-->
+                        </div>
+
+
+
+<?php include ROOT_PATH . 'templates/app/infoBody.html'; ?>
+
+
+
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/主内容开始-->
+
+<!--统一底导结构-->
+<div class="op_footer">
+<div class="inner">
+    <p class="links">
+		<a href="/">开放平台</a><span class="W_vline">|</span>
+		<a href="/">博客</a>
+	</p>
+    <p class="copyright W_textb">
+		<span>= =|| </span>
+		<span>样式拿自新浪微博</span>
+		<span>Copyright &copy; lmyoaoa.com</span>
+	</p>
+</div>
+</div>
+<!--/统一底导结构-->
+
+<div id="pl_web_wikiApiScore" class="api_comment clearfix" style="">
+    <a action-type="folder" href="#" onclick="return false;" class="api_tip"><span>api评价</span></a>
+</div>
+
+<script type="text/javascript" src="/tmp/gaea.js" ></script>
+<script type="text/javascript" src="/tmp/wikiApi.js" ></script>
+
+</body></html>

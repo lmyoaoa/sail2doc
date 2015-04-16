@@ -19,7 +19,7 @@ class IndexPage extends Controller {
             $data = $_POST;
             $id = DocumentsInterface::add($data);
             if( $id ) {
-                header("Location: ./add/");
+                header("Location: /index/add");
             }
         }
         $this->render('add.html', array(

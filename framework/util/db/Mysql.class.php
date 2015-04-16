@@ -55,7 +55,6 @@ class Mysql {
         $data = $this->_formatValue($array);
 
         $sql = 'insert into `' . $this->tableName . '` set ' . $data['str'];
-        echo $sql;
         $sth = $conn->prepare($sql);
         $res = $sth->execute($data['data']);
         //$arr = $sth->errorInfo(); print_r($arr);
@@ -213,12 +212,18 @@ class Mysql {
     }
 
     /**
-     * 获取数据库字段
+     * @desc 获取数据库字段
+     * @param string $table 表名
+     * @param string $full 是否需要注释，默认无注释
      */
-    public function getFields($table='') {
+    public function getFields($table='', $full=false) {
         $table = $table ? $table : $this->tableName;
         $conn = $this->getConnect();
-        $cq = $conn->query("DESCRIBE $table");
+        if( $full ) {
+            $cq = $conn->query("show full columns from $table");
+        }else{
+            $cq = $conn->query("DESCRIBE $table");
+        }
         $result = $cq->fetchAll( $this->resultMode );
         unset($cq);
         return $result;

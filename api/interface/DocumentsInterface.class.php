@@ -28,6 +28,10 @@ class DocumentsInterface {
         if( !empty($info) ) {
             $info['params'] = json_decode($info['params'], true);
             $info['ret'] = json_decode($info['ret'], true);
+            $info['tables'] = json_decode($info['tables'], true);
+            if( !empty($info['tables']) ) {
+                $info['ret'] = self::mergeReturn($info['tables'], $info['ret']);
+            }
         }
         return $info;
     }
@@ -53,6 +57,7 @@ class DocumentsInterface {
             'url' => $data['url'],
             'type' => $data['type'],
             'ret_demo' => $data['desc'],
+            'tables' => json_encode($data['table']),
         );
 
         //格式化参数
@@ -78,9 +83,49 @@ class DocumentsInterface {
                 'desc' => $data['ret']['desc'][$k],
             );
         }
+
+        //对数据表进行解析处理，假如表结构发生更改，则会导致bug，不对表结构进行预处理
+        /*
+        if( !empty($data['table']) ) {
+            foreach( $data['table'] as $v ) {
+                $fields = DbsInterface::getFields($v);
+
+                foreach( $fields as $v ) {
+                    $arr[] = array(
+                        'name' => $v['Field'],
+                        'type' => $v['Type'],
+                        'desc' => $v['Comment'],
+                    );
+                }
+            }
+        }
+        */
         $array['ret'] = json_encode($arr);
 
         return $array;
     }
+
+    /**
+     * @desc 合并表结构与返回字段说明数组
+     */
+    public static function mergeReturn($tables, $ret) {
+        $arr = array();
+        if( !empty($tables) && is_array($tables) ) {
+            foreach( $tables as $v ) {
+                $fields = DbsInterface::getFields($v);
+
+                foreach( $fields as $v ) {
+                    $arr[] = array(
+                        'name' => $v['Field'],
+                        'type' => $v['Type'],
+                        'desc' => $v['Comment'],
+                    );
+                }
+            }
+        }
+        $arr = array_merge($arr, $ret);
+        return $arr;
+    }
+
 }
 

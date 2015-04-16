@@ -37,11 +37,11 @@
 <a href='/index.php?m=misc&f=about' target='' class='about iframe' data-width='900' data-headerless='true' data-class='modal-about'>关于</a>
 </div>
     <h5 id='companyname'>
-      XXOO项目管理系统    </h5>
+      <a href="/">返回文档首页</a></h5>
   </div>
   <nav id='mainmenu'>
     <ul class='nav'>
-<li ><a href='/index.php?m=my&f=index'  id='menumy'><i class="icon-home"></i><span> 我的地盘</span></a></li>
+<li ><a href='/'  id='menumy'><i class="icon-home"></i><span> 我的地盘</span></a></li>
 <li ><a href='/index.php?m=product&f=index'  id='menuproduct'>产品</a></li>
 <li class='active'><a href='/index.php?m=project&f=index' class='active' id='menuproject'>项目</a></li>
 <li ><a href='/index.php?m=qa&f=index'  id='menuqa'>测试</a></li>
@@ -150,32 +150,23 @@
         </td>
       </tr>
 
-<script>
-function addParam() {
-    var str = '<div class="input-group" data-num="1">\
-            <span class="input-group-addon">参数</span>\
-            <input type="text" name="param[name][]" value="" class="form-control w-100px form-date" placeholder="参数名" />\
-            <input type="text" name="param[type][]" value="" class="form-control form-date" placeholder="类型" />\
-            <input type="text" name="param[desc][]" value="" class="form-control form-date" placeholder="字段说明" />\
-            <input type="text" name="param[need][]" value="" class="form-control w-100px form-date" placeholder="必填，不写为非必填，必填请写1" />\
-          </div>';
-    $(str).appendTo('#paramsDiv');
-}
-
-function addReturn() {
-    var str = '<div class="input-group" data-num="1">\
-            <span class="input-group-addon">字段1</span>\
-            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />\
-            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />\
-            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />\
-          </div>';
-    $(str).appendTo('#returnDiv');
-}
-</script>
 
       <tr>
         <th>数据返回demo</th>
             <td colspan='2'><textarea name='desc' id='desc' rows='6' style="height:200px;" class='form-control'></textarea></td>
+      </tr>
+
+      <tr>
+        <th>返回字段库表</th>
+        <td id="returnTable">
+          <div class="input-group" data-num="1">
+            <span class="input-group-addon">数据表</span>
+            <input type="text" name="table[]" value="" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />
+          </div>
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addTable();">添加数据表</a>
+        </td>
       </tr>
 
       <tr>
@@ -202,6 +193,38 @@ function addReturn() {
   </div>  
     
 </div>
+
+<script>
+function addParam() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">参数</span>\
+            <input type="text" name="param[name][]" value="" class="form-control w-100px form-date" placeholder="参数名" />\
+            <input type="text" name="param[type][]" value="" class="form-control form-date" placeholder="类型" />\
+            <input type="text" name="param[desc][]" value="" class="form-control form-date" placeholder="字段说明" />\
+            <input type="text" name="param[need][]" value="" class="form-control w-100px form-date" placeholder="必填，不写为非必填，必填请写1" />\
+          </div>';
+    $(str).appendTo('#paramsDiv');
+}
+
+function addReturn() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">字段1</span>\
+            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />\
+            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />\
+            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />\
+          </div>';
+    $(str).appendTo('#returnDiv');
+}
+
+function addTable() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">数据表</span>\
+            <input type="text" name="table[]" value="" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />\
+          </div>';
+    $(str).appendTo('#returnTable');
+}
+
+</script>
 
 <div id='footer'>
 

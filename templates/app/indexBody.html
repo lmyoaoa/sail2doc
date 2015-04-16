@@ -28,11 +28,12 @@ $list = $this->list;
 
 <?php
 $c = count($list);
-foreach( $list as $v ) {
-echo '
-    <tr>
-        <td style="text-align:center;" rowspan="' . $c . '">接口</td>
-        <td><a title="" href="/index/info/?id='. $v['id'] . '">' . $v['url'] . '</a></td>
+foreach( $list as $k => $v ) {
+    echo '<tr>';
+    if( $k == 0 ) {
+        echo '<td style="text-align:center;" rowspan="' . $c . '">接口</td>';
+    }
+        echo '<td><a title="" href="/index/info/?id='. $v['id'] . '">' . $v['url'] . '</a></td>
         <td>' . $v['title'] . '</td>
     </tr>';
 }

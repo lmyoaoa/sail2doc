@@ -10,8 +10,8 @@ sail2doc
 
   #nginx配置文件
   server {
-      listen       8081;  #这个端口改成默认80
-      server_name  dev.sail.com;  #配置访问url
+      listen       80;
+      server_name  xx.xx.com;  #配置访问url
       location / {
           root   /usr/htdocs/sail;   #框架目录
           index  index.html index.htm index.php;

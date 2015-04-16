@@ -7,24 +7,13 @@ class IndexPage extends Controller {
 
     //直接输出
     public function indexAction() {
+        $list = DocumentsInterface::getListAll();
         $this->render('index.html', array(
-            'kk'=>22,
+            'list' => $list,
         ));
     }
 
-    //加载模板
-    public function listAction() {
-        print_r($_GET);
-        $m = new IndexInterface();
-        exit;
-        $this->render( 'list.html', array(
-            'kk'=>22,
-            'vv'=>'33',
-            'test'=>'testPage',
-            'desc'=>'页面变量都在这个$this里面',
-        ));
-    }
-
+    //添加文档
     public function addAction() {
         if( $_POST ) {
             $data = $_POST;

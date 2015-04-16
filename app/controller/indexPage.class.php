@@ -7,7 +7,9 @@ class IndexPage extends Controller {
 
     //直接输出
     public function indexAction() {
-        echo "hello world\r\n";
+        $this->render('index.html', array(
+            'kk'=>22,
+        ));
     }
 
     //加载模板

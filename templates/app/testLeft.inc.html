@@ -1,0 +1,87 @@
+<?php
+$info = $this->info;
+?>
+<div class="form_apitest">
+<form method="post" id="form">
+  <dl class="s1 clearfix">
+    <dt> <select select node-type="applist" > <option value="3401501650">ceshisdfsdf</option> </select> </dt>
+    <dd><a href="javascript:;" action-type="getAccessToken" class="W_btn_b"><span>获取Acess Token</span></a></dd>
+
+  </dl>
+  <dl class="s2">
+    <dt>Access Token:</dt>
+    <dd><input type="text" id="accessToken" class="W_inputStp" value="<?php echo $this->con['access_token']; ?>" /></dd>
+  </dl>
+  <p class="line"></p>
+  <dl class="s3 clearfix">
+    <dt>API分类：</dt>
+    <dd><select node-type="apitype" ><option>--xx--</option></select></dd>
+  </dl>
+  <dl class="s3 clearfix">
+    <dt>API名称：</dt>
+    <dd><select name="api" id="api">
+<?php
+        echo '<option value="' . $info['id'] . '">' . $info['title'] . '</option>';
+?>
+    </select></dd>
+  </dl>
+  <dl class="s3 clearfix"><dt>获取方式：</dt><dd>
+  <label><input type="radio" value="get" name="request_type">GET</label>
+  <label><input type="radio" checked="checked" value="post" name="request_type">POST</label></dd>
+  </dl>
+  <dl class="s3 clearfix">
+    <dt>API文档：</dt>
+    <dd><a href="/index/info?id=<?php echo $info['id']; ?>" target="_blank">点击获取文档</a></dd>
+  </dl>
+  <dl class="addbox" node-type="addbox">
+   <dt class="W_fb">API参数</dt>
+
+<div id="paramsDiv">
+   <dd class="inp"><input type="text" value="" class="W_inputStp wid1" name="param[]">：<input type="text" value=""  class="W_inputStp wid2" name="val[]"><a href="javascript:;" class="op_closes" action-type="delrow"></a></dd>
+</div>
+                                     
+
+  <dd class="link" node-type="link"><span class="icon_op_add"></span><a href="javascript:;" class="addPPP">添加</a></dd>
+  </dl>
+  <dl class="s2">
+  <dd><a href="javascript:;" class="W_btn_b" action-type="testDo"><span>调用接口</span></a></dd>
+  </dl>
+</form>
+</div>
+<script>
+$(document).ready(function(){
+    $(".addPPP").click(function() {
+        var str = '<dd class="inp"><input type="text" value="" class="W_inputStp wid1" name="param[]">：<input type="text" value=""  class="W_inputStp wid2" name="val[]"><a href="javascript:;" class="op_closes" action-type="delrow"></a></dd>';
+        $(str).appendTo("#paramsDiv");
+    });
+
+    $("body").on("click", "a[action-type='delrow']", function(){
+        $(this).parent('.inp').remove();
+    }).on("click", 'a[action-type="testDo"]', function(){
+        var token = $("#accessToken").val();
+        var type = $("input[name='request_type'][checked='checked']").val();
+        var apiId = $("#api").val();
+        var tmpKey = tmpVal = str = '';
+        $(".inp input").each(function(){
+            var tmp = $(this).attr('name');
+            var tmpV = $(this).val();
+            if( tmp == 'param[]' ) {
+                str += '&param[]=' + tmpV;
+            }
+            if( tmp == 'val[]' ) {
+                str += '&val[]=' + tmpV;
+            }
+        });
+        var dataUrl = '<?php echo $info['url'];?>?token=' + token + '&id=' + apiId + '&type=' + type + str;
+        $.ajax({
+            type: 'post', 
+            url: '/index/testDo',
+            data: 'token=' + token + '&id=' + apiId + '&type=' + type + str,
+            success: function(data) {
+                $("#postUrl").val(dataUrl);
+                $("#postRes").val(data);
+            }
+        });
+    });
+});
+</script>

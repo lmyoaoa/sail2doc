@@ -7,7 +7,7 @@ sail2doc
 
 配置
 ====
-
+<pre>
   #nginx配置文件
   server {
       listen       80;
@@ -32,3 +32,4 @@ sail2doc
           include        fastcgi_params;
       }
   }
+</pre>

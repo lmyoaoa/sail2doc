@@ -31,57 +31,18 @@
 
 <header id='header'>
   <div id='topbar'>
-    <div class='pull-right' id='topnav'><div class='dropdown' id='userMenu'><a href='javascript:;' data-toggle='dropdown'><i class='icon-user'></i> admin <span class='caret'></span></a><ul class='dropdown-menu'><li><a href='/index.php?m=my&f=profile&onlybody=yes' target='' class='iframe' data-width='600'>个人档案</a>
-</li><li><a href='/index.php?m=my&f=changepassword&onlybody=yes' target='' class='iframe' data-width='500'>更改密码</a>
-</li><li class='divider'></li><li class='dropdown-submenu left'><a href='javascript:;'>主题</a><ul class='dropdown-menu'><li class='theme-option active'><a href='javascript:selectTheme("default");' data-value='default'>默认</a></li><li class='theme-option'><a href='javascript:selectTheme("green");' data-value='green'>绿色</a></li><li class='theme-option'><a href='javascript:selectTheme("red");' data-value='red'>红色</a></li><li class='theme-option'><a href='javascript:selectTheme("lightblue");' data-value='lightblue'>亮蓝</a></li><li class='theme-option'><a href='javascript:selectTheme("blackberry");' data-value='blackberry'>黑莓</a></li></ul></li><li class='dropdown-submenu left'><a href='javascript:;'>Language</a><ul class='dropdown-menu'><li class='lang-option active'><a href='javascript:selectLang("zh-cn");' data-value='zh-cn'>简体</a></li><li class='lang-option'><a href='javascript:selectLang("zh-tw");' data-value='zh-tw'>繁體</a></li><li class='lang-option'><a href='javascript:selectLang("en");' data-value='en'>English</a></li></ul></li></ul></div><a href='/index.php?m=user&f=logout' >退出</a>
-<a href='/index.php?m=misc&f=about' target='' class='about iframe' data-width='900' data-headerless='true' data-class='modal-about'>关于</a>
-</div>
+    
     <h5 id='companyname'>
       <a href="/">返回文档首页</a></h5>
   </div>
   <nav id='mainmenu'>
     <ul class='nav'>
-<li ><a href='/'  id='menumy'><i class="icon-home"></i><span> 我的地盘</span></a></li>
-<li ><a href='/index.php?m=product&f=index'  id='menuproduct'>产品</a></li>
-<li class='active'><a href='/index.php?m=project&f=index' class='active' id='menuproject'>项目</a></li>
-<li ><a href='/index.php?m=qa&f=index'  id='menuqa'>测试</a></li>
-<li ><a href='/index.php?m=doc&f=index'  id='menudoc'>文档</a></li>
-<li ><a href='/index.php?m=report&f=index'  id='menureport'>统计</a></li>
-<li ><a href='/index.php?m=company&f=index'  id='menucompany'>组织</a></li>
-<li ><a href='/index.php?m=admin&f=index'  id='menuadmin'>后台</a></li>
+<li ><a href='/'  id='menumy'><i class="icon-home"></i><span>返回首页</span></a></li>
 </ul>
-<div class='input-group input-group-sm' id='searchbox'><div class='input-group-btn' id='typeSelector'><button type='button' class='btn dropdown-toggle' data-toggle='dropdown'><span id='searchTypeName'>项目</span> <span class='caret'></span></button><input type='hidden' name='searchType' id='searchType' value='project'  />
-<ul class='dropdown-menu'><li><a href='javascript:;' data-value='bug'>Bug</a></li><li><a href='javascript:;' data-value='story'>需求</a></li><li><a href='javascript:;' data-value='task'>任务</a></li><li><a href='javascript:;' data-value='testcase'>用例</a></li><li><a href='javascript:;' data-value='project'>项目</a></li><li><a href='javascript:;' data-value='product'>产品</a></li><li><a href='javascript:;' data-value='user'>用户</a></li><li><a href='javascript:;' data-value='build'>版本</a></li><li><a href='javascript:;' data-value='release'>发布</a></li><li><a href='javascript:;' data-value='productplan'>产品计划</a></li><li><a href='javascript:;' data-value='testtask'>测试版本</a></li><li><a href='javascript:;' data-value='doc'>文档</a></li></ul></div><input type='text' name='searchQuery' id='searchQuery' value='' onclick='this.value=""' onkeydown='if(event.keyCode==13) shortcut()' class='form-control' placeholder='编号(ctrl+g)' />
-<div id='objectSwitcher' class='input-group-btn'><a href='javascript:shortcut();' class='btn'>GO! </a></div></div>
+
   </nav>
   <nav id="modulemenu">
-    <ul class='nav'>
-<li><a id='currentItem' href="javascript:showDropMenu('project', '2', 'project', 'create', '')">企业网站第二期 <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>
-<li class=' '><a href='/index.php?m=project&f=task&projectID=2' target='' id=submenutask>任务</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=story&projectID=2' target='' id=submenustory>需求</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=bug&projectID=2' target='' id=submenubug>Bug</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=build&projectID=2' target='' id=submenubuild>版本</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=testtask&projectID=2' target='' id=submenutesttask>测试</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=team&projectID=2' target='' id=submenuteam>团队</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=dynamic&projectID=2' target='' id=submenudynamic>动态</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=doc&porjectID=2' target='' id=submenudoc>文档</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=manageproducts&projectID=2' target='' id=submenuproduct>产品</a>
-</li>
-<li class=' '><a href='/index.php?m=project&f=view&projectID=2' target='' id=submenuview>概况</a>
-</li>
-<li class='right '><a href='/index.php?m=project&f=create' target='' id=submenucreate><i class="icon-plus"></i>&nbsp;添加项目</a>
-</li>
-<li class='right '><a href='/index.php?m=project&f=index&locate=no&status=undone&projectID=2' target='' id=submenuall><i class="icon-th-large"></i>&nbsp;所有项目</a>
-</li>
-</ul>
+    
   </nav>
 </header>
 

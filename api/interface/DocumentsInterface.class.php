@@ -56,6 +56,7 @@ class DocumentsInterface {
             'title' => $data['title'],
             'url' => $data['url'],
             'type' => $data['type'],
+            'is_login' => $data['is_login'],
             'ret_demo' => $data['desc'],
             'tables' => json_encode($data['table']),
         );

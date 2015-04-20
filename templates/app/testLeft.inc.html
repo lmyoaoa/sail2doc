@@ -72,7 +72,7 @@ $(document).ready(function(){
                 str += '&val[]=' + tmpV;
             }
         });
-        var dataUrl = '<?php echo $info['url'];?>?token=' + token + '&id=' + apiId + '&type=' + type + str;
+        var dataUrl = '<?php echo trim($info['url'], '/');?>/access_token/' + token + '/?id=' + apiId + '&type=' + type + str;
         $.ajax({
             type: 'post', 
             url: '/index/testDo',

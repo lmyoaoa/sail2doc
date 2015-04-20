@@ -66,15 +66,8 @@ class IndexPage extends Controller {
                 $postData[$v] = $vals[$k];
             }
 
-            /*
-            $httpParam = '';
-            foreach( $postData as $k => $v ) {
-                $httpParam[] = $k . '=' . $v;
-            }
-            $httpParam = implode('&', $httpParam);
-            */
             $info = DocumentsInterface::getInfo($id);
-            $con = Http::post($info['url'], $postData);
+            $con = Http::post(trim($info['url'], '/') . '/access_token/' . $token, $postData);
 
             echo $con;
         }

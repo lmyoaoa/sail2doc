@@ -42,7 +42,7 @@ class DocumentsInterface {
      */
     public static function getListAll() {
         $mod = new DocumentsModel();
-        $list = $mod->getRows('*');
+        $list = $mod->getRows('*', array(), 1, 1000);
         $list = $list['rows'];
         foreach( $list as $k => $info ) {
             $list[$k]['params'] = json_decode($info['params'], true);

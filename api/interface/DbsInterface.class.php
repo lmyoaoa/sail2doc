@@ -23,8 +23,10 @@ class DbsInterface {
      * @param string $string 库表字符串，如car.car_sale
      */
     public static function getFields($string) {
-        list($tmpDb, $tmpTable) = $v = explode('.', $string);
+        $v = explode('.', $string);
         if( count($v) == 2 ) {
+            $tmpDb = $v[0];
+            $tmpTable = $v[1];
             $info = self::search($tmpDb);
 
             $key = $tmpDb . '_' . $tmpTable;

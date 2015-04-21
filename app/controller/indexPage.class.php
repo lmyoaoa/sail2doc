@@ -60,13 +60,14 @@ class IndexPage extends Controller {
         $id = $post['id'];
         if( $id ) {
             $postData = array(
-                'access_token' => $token,
+                //'access_token' => $token,
             );
             foreach( $params as $k => $v ) {
                 $postData[$v] = $vals[$k];
             }
 
             $info = DocumentsInterface::getInfo($id);
+            //echo trim($info['url'], '/') . '/access_token/' . $token;
             $con = Http::post(trim($info['url'], '/') . '/access_token/' . $token, $postData);
 
             echo $con;

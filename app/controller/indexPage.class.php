@@ -28,6 +28,7 @@ class IndexPage extends Controller {
         ));
     }
     
+    //编辑页面
     public function editAction() {
         $id = $_GET['id'];
 
@@ -41,7 +42,7 @@ class IndexPage extends Controller {
         }
         $this->render('edit.html', array(
             'info' => $info,
-            'test'=>'testPage',
+            'id'=> $id,
         ));
     }
 

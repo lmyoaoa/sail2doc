@@ -15,12 +15,21 @@ class DocumentsInterface {
         return $id;
     }
 
+    public static function edit($id, $data) {
+        $arr = self::formatData($data);
+        $mod = new DocumentsModel();
+        return $mod->update(array(
+        array('id', '=', $id)
+        ), $arr);
+    }
+
     /**
      * @desc 获取文档详情
      * @author lmyoaoa
      * @param int $id 文档id
+     * @param bool $isOrigin 是否返回原始数据(即数据表如car.car_sale是否需要转换成详细字段说明合并到ret_demo字段，默认会整合)
      */
-    public static function getInfo($id) {
+    public static function getInfo($id, $isOrigin=true) {
         $mod = new DocumentsModel();
         $info = $mod->getOne('*', array(
             array('id', '=', $id),
@@ -29,7 +38,7 @@ class DocumentsInterface {
             $info['params'] = json_decode($info['params'], true);
             $info['ret'] = json_decode($info['ret'], true);
             $info['tables'] = json_decode($info['tables'], true);
-            if( !empty($info['tables']) ) {
+            if( !empty($info['tables']) && $isOrigin ) {
                 $info['ret'] = self::mergeReturn($info['tables'], $info['ret']);
             }
         }
@@ -67,7 +76,7 @@ class DocumentsInterface {
             if( $v == '' ) continue;
             $arr[] = array(
                 'name' => $v,
-                'need' => $data['param']['need'][$k],
+                'need' => intval($data['param']['need'][$k]),
                 'type' => $data['param']['type'][$k],
                 'desc' => $data['param']['desc'][$k],
             );

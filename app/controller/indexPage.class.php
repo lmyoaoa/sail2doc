@@ -27,6 +27,23 @@ class IndexPage extends Controller {
             'desc'=>'页面变量都在这个$this里面',
         ));
     }
+    
+    public function editAction() {
+        $id = $_GET['id'];
+
+        $info = DocumentsInterface::getInfo($id, false);
+        if( $_POST ) {
+            $data = $_POST;
+            $ret = DocumentsInterface::edit($id, $data);
+            if( $ret ) {
+                header("Location: /index/info?id={$id}");
+            }
+        }
+        $this->render('edit.html', array(
+            'info' => $info,
+            'test'=>'testPage',
+        ));
+    }
 
     //详情
     public function infoAction() {

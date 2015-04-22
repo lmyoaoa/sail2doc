@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name="renderer" content="webkit"> 
+  <title>编辑文档</title>
+<link rel='stylesheet' href='/tmp/zh-cn.default.css?v=7.0' type='text/css' media='screen' />
+<script src="/tmp/jquery.js"></script>
+<style>.mgr-5px{margin-right:5px;}
+#tipsModal {margin-top: 10%;}
+#begin + .input-group-addon {border-left: none; border-right: none;}
+#begin,#end {max-width: 150px; width: auto}
+
+#copyProjectModal {padding: 0}
+#copyProjectModal {padding: 0 2px}
+#copyProjectModal > div {position: relative;}
+#copyProjectModal a {display: block; min-height: 30px; line-height: 30px; padding: 5px 15px; border: 1px solid #e5e5e5; color: #333; margin: 5px 0}
+#copyProjectModal a > i {display: inline-block; margin-right: 5px;}
+#copyProjectModal a:hover {border:1px solid #39B3D7; background-color: #E5F9FF; text-decoration: none}
+#copyProjectModal a.active {border-color: #229F24; color: #229F24; background-color: #E5FFE6}
+#copyProjectModal a.active:after {position: absolute; content: '\e60d'; font-family: ZenIcon; font-size: 20px; right: 25px;}
+#copyProjectModal a.cancel {color: #D2322D}
+
+.modal-dialog {margin-top: 10%!important;}
+.input-group {margin-top:3px;}
+</style><link rel='icon' href='/favicon.ico' type='image/x-icon' />
+<link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+</head>
+<body>
+<?php
+$info = $this->info;
+?>
+<header id='header'>
+  <div id='topbar'>
+    
+    <h5 id='companyname'>
+      <a href="/">返回文档首页</a></h5>
+  </div>
+  <nav id='mainmenu'>
+    <ul class='nav'>
+<li ><a href='/'  id='menumy'><i class="icon-home"></i><span>返回首页</span></a></li>
+</ul>
+
+  </nav>
+  <nav id="modulemenu">
+    
+  </nav>
+</header>
+
+<div id='wrap'>
+  <div class='outer'>
+
+
+
+<div class='container mw-1400px'>
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix'><i class='icon-folder-close-alt'></i></span>
+      <strong><small class='text-muted'><i class='icon icon-plus'></i></small> 添加文档</strong>
+    </div>
+  </div>
+  <form class='form-condensed' method='post' id='dataform'>
+    <table class='table table-form'> 
+      <tr>
+        <th class='w-90px'>接口名称</th>
+        <td class='w-p25-f'><input type='text' name='title' id='title' value="<?php echo $info['title']; ?>" class='form-control' />
+</td><td></td>
+      </tr>
+      <tr>
+        <th>接口地址</th>
+        <td><input type='text' name='url' id='url' value="<?php echo $info['url']; ?>" class='form-control' />
+</td>
+      </tr>
+
+      <tr>
+        <th>接口类型</th>
+        <td>
+          <select name='type' id='type' class='form-control'>
+            <?php
+            if ( $info['type'] == 'get' ) {
+                echo "<option value='post'>post</option> <option value='get' selected>GET</option>";
+            }else{
+                echo "<option value='post' selected>post</option> <option value='get'>GET</option>";
+            }
+            ?>
+          </select>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      <tr>
+        <th>是否需要登录</th>
+        <td>
+          <select name='is_login' id='type' class='form-control'>
+            <?php
+                if( $info['is_login'] ) {
+                    echo "<option value='1' selected>是</option> <option value='0'>否</option>";
+                }else{
+                    echo "<option value='1'>是</option> <option value='0' selected>否</option>";
+                }
+            ?>
+          </select>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      <tr>
+        <th>请求参数</th>
+        <td id="paramsDiv">
+
+            <?php
+            foreach( $info['params'] as $k => $v ) {
+                echo "
+                <div class='input-group' data-num='1'>
+            <span class='input-group-addon'>参数1</span>
+            <input type='text' name='param[name][]' value='{$v['name']}' class='form-control w-100px form-date' placeholder='参数名' />
+            <input type='text' name='param[type][]' value='{$v['type']}' class='form-control form-date' placeholder='类型' />
+            <input type='text' name='param[desc][]' value='{$v['desc']}' class='form-control form-date' placeholder='字段说明' />
+            <input type='text' name='param[need][]' value='{$v['need']}' class='form-control w-100px form-date' placeholder='必填，不写为非必填，必填请写1' />
+          </div>";
+            }
+            ?>
+          
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addParam();">添加参数</a>
+        </td>
+      </tr>
+
+
+      <tr>
+        <th>数据返回demo</th>
+            <td colspan='2'><textarea name='desc' id='desc' rows='6' style="height:200px;" class='form-control'><?php echo $info['ret_demo'];?></textarea></td>
+      </tr>
+
+      <tr>
+        <th>返回字段库表</th>
+        <td id="returnTable">
+            <?php
+            if( is_array($info['tables']) ) {
+                foreach( $info['tables'] as $k => $v ) {
+                    echo '
+                    <div class="input-group" data-num="1">
+                    <span class="input-group-addon">数据表</span>
+                    <input type="text" name="table[]" value="' . $v . '" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />
+                  </div>
+                    ';
+                }
+            }else{
+                echo '
+                    <div class="input-group" data-num="1">
+                    <span class="input-group-addon">数据表</span>
+                    <input type="text" name="table[]" value="" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />
+                  </div>';
+            }
+            ?>
+          
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addTable();">添加数据表</a>
+        </td>
+      </tr>
+
+      <tr>
+        <th>返回字段说明</th>
+        <td id="returnDiv">
+            <?php
+            foreach( $info['ret'] as $k => $v ) {
+                echo '
+                <div class="input-group" data-num="1">
+                    <span class="input-group-addon">字段1</span>
+                    <input type="text" name="ret[name][]" value="' . $v['name'] . '" class="form-control w-100px form-date" placeholder="字段名" />
+                    <input type="text" name="ret[type][]" value="' . $v['type'] . '" class="form-control w-100px form-date" placeholder="字段类型" />
+                    <input type="text" name="ret[desc][]" value="' . $v['desc'] . '" class="form-control w-100px form-date" placeholder="字段说明" />
+                  </div>
+                ';
+            }
+            ?>
+          
+        </td>
+        <td>
+        <a href="javascript:;" onclick="addReturn();">添加字段</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td></td><td colspan='2' class='text-center'> <button type='submit' id='submit'  class='btn btn-submit btn-primary'>保存</button><a href='javascript:history.go(-1);' class='btn btn-back'  >返回</a></td>
+      </tr>
+    </table>
+  </form>
+</div>
+  </div>  
+    
+</div>
+
+<script>
+function addParam() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">参数</span>\
+            <input type="text" name="param[name][]" value="" class="form-control w-100px form-date" placeholder="参数名" />\
+            <input type="text" name="param[type][]" value="" class="form-control form-date" placeholder="类型" />\
+            <input type="text" name="param[desc][]" value="" class="form-control form-date" placeholder="字段说明" />\
+            <input type="text" name="param[need][]" value="" class="form-control w-100px form-date" placeholder="必填，不写为非必填，必填请写1" />\
+          </div>';
+    $(str).appendTo('#paramsDiv');
+}
+
+function addReturn() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">字段1</span>\
+            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />\
+            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />\
+            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />\
+          </div>';
+    $(str).appendTo('#returnDiv');
+}
+
+function addTable() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">数据表</span>\
+            <input type="text" name="table[]" value="" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />\
+          </div>';
+    $(str).appendTo('#returnTable');
+}
+
+</script>
+
+<div id='footer'>
+
+</div>
+
+</body>
+</html>

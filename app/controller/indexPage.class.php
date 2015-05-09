@@ -102,11 +102,22 @@ class IndexPage extends Controller {
         $id = intval($_GET['id']);
         if(!$id) header("Location: /");
         
-        $list = DocumentsInterface::getListByCat($id);
+        $info = CategoryInterface::getInfo($id);
+
+        //是顶级分类，那么需要将下面的分类都取出来
+        if( $info['pid'] == 0 ) {
+            $child = CategoryInterface::getChild($id);
+            foreach( $child['rows'] as $v ) {
+                $ids[] = $v['id'];
+            }
+            $list = DocumentsInterface::getListByCat($ids);
+        }else{
+            $list = DocumentsInterface::getListByCat($id);
+        }
+
         $list = DocumentsInterface::formatReadType($list);
         $catList = $list['cat'];
         $list = $list['list'];
-        $info = CategoryInterface::getInfo($id);
 
         $pageTitle = $info['title'] . '列表';
         $this->render('cat.html', array(

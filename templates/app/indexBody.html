@@ -25,13 +25,13 @@ $list = $this->list;
 <p><br></p>
 
 
-<table width="100%" cellspacing="0" cellpadding="0" border="0" class="wiki_table">
-<colgroup><col class="tbF1"><col class="tbF2"><col></colgroup>
-<tbody>
 
 <?php
 foreach( $list as $tmpCatId => $topv ) {
-    echo '<tr><th scope="col" colspan="3"><span id="catid_' . $this->catList[$tmpCatId]['id'] . '">' . $this->catList[$tmpCatId]['title'] . '</span></th></tr>';
+    echo '<table width="100%" cellspacing="0" cellpadding="0" border="0" class="wiki_table">
+    <colgroup><col class="tbF1"><col class="tbF2"><col></colgroup>
+    <tbody>
+    <tr><th scope="col" colspan="3"><span id="catid_' . $this->catList[$tmpCatId]['id'] . '">' . $this->catList[$tmpCatId]['title'] . '</span></th></tr>';
     foreach( $topv as $readType => $secv ) {
         $c = count($secv);
         foreach( $secv as $k => $v ) {
@@ -44,10 +44,9 @@ foreach( $list as $tmpCatId => $topv ) {
             </tr>';
         }
     }
+    echo '</tbody></table> <p><br> </p>';
 }
 ?>
-</tbody></table>
-<p><br> </p>
 
 
 

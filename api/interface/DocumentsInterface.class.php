@@ -66,9 +66,15 @@ class DocumentsInterface {
      */
     public static function getListByCat($catId) {
         $mod = new DocumentsModel();
-        $list = $mod->getRows('*', array(
-            array('cat_id', '=', $catId)
-        ), 1, 200);
+        if( is_array($catId) ) {
+            $list = $mod->getRows('*', array(
+                array('cat_id', 'in', $catId)
+            ), 1, 200);
+        }else{
+            $list = $mod->getRows('*', array(
+                array('cat_id', '=', $catId)
+            ), 1, 200);
+        }
         $list = $list['rows'];
         foreach( $list as $k => $info ) {
             $list[$k]['params'] = json_decode($info['params'], true);

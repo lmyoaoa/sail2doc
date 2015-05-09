@@ -33,5 +33,13 @@ class CategoryInterface {
         ));
         return $info;
     }
+
+    public static function getChild($id) {
+        $mod = new CategoryModel();
+        $list = $mod->getRows('*', array(
+            array('pid', '=', $id),
+        ), 1, 500);
+        return $list;
+    }
 }
 

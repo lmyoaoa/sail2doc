@@ -1,4 +1,7 @@
 <?php
+/**
+ * @desc 数据库配置接口
+ */
 
 class DbsInterface {
 

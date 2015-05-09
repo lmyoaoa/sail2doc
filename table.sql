@@ -12,6 +12,10 @@ create table `documents` (
     `update_time` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
     primary key(`id`)
 ) Engine=Innodb default charset=utf8 comment '文档主表';
+ALTER TABLE `documents` ADD `cat_id` INT(11)  NOT NULL  DEFAULT '0'  COMMENT '所属分类id'  AFTER `title`;
+ALTER TABLE `documents` ADD `read_type` CHAR(15)  NOT NULL  DEFAULT '读取'  COMMENT '读取接口/写入接口'  AFTER `cat_id`;
+
+
 
 create table `dbs` (
     `id` int(11) not null auto_increment,
@@ -22,3 +26,14 @@ create table `dbs` (
     `dbname` char(20) not null default '' comment '库名',
     primary key(`id`)
 ) Engine=Innodb default charset=utf8 comment '数据库配置';
+
+--分类表，以 项目-模块 来继承
+create table `category` (
+    `id` int(11) not null auto_increment,
+    `title` varchar(50) not null default '' comment '分类名',
+    `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父分类id',
+    `sort` int(11) NOT NULL DEFAULT '100' COMMENT '排序',
+    `create_time` int(10) NOT NULL DEFAULT '0' COMMENT '添加时间',
+    `update_time` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+    primary key(`id`)
+) ENGINE=Innodb default charset=utf8 comment '分类表';

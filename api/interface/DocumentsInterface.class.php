@@ -60,6 +60,41 @@ class DocumentsInterface {
         return $list;
     }
 
+    /**
+     * @desc 按分类获取文档列表
+     * @author lmyoaoa
+     */
+    public static function getListByCat($catId) {
+        $mod = new DocumentsModel();
+        $list = $mod->getRows('*', array(
+            array('cat_id', '=', $catId)
+        ), 1, 200);
+        $list = $list['rows'];
+        foreach( $list as $k => $info ) {
+            $list[$k]['params'] = json_decode($info['params'], true);
+            $list[$k]['ret'] = json_decode($info['ret'], true);
+        }
+        return $list;
+    }
+
+    public static function formatReadType($list) {
+        $arr = $cat = $ret = array();
+        foreach( $list as $v ) {
+            $arr[$v['cat_id']][] = $v;
+            $cat[$v['cat_id']] = CategoryInterface::getInfo($v['cat_id']);
+        }
+
+        foreach( $arr as $catId => $v ) {
+            foreach( $v as $v2 ) {
+                $ret[$catId][$v2['read_type']][] = $v2;
+            }
+        }
+        return array(
+            'list' => $ret,
+            'cat' => $cat,
+        );
+    }
+
     protected static function formatData($data) {
         $array = array(
             'title' => $data['title'],

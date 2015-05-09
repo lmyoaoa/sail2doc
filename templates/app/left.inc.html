@@ -9,9 +9,22 @@
 	<li class="n_top "><h3 action-type="folder"><a href="http://mbs.273.cn/Tph/"><em class="wiki_icon icon_平台公告"></em><span class="txt">新增接口</span></a></h3></li>
 	<li class="n_top "><h3 action-type="folder"><a href="/index/add"><em class="wiki_icon icon_平台公告"></em><span class="txt">新增接口[旧版]</span></a></h3></li>
 
-	<li class="n_top ">
-	<h3 action-type="folder"><a href ="#" onclick="return false;"><em
-		class="wiki_icon icon_wkDoc"></em><span class="txt">微博API</span><em class="nav_arr"></em>	</a></h3>	<ul class="child_list" style="display:none;"><li id="n-.E5.BE.AE.E5.8D.9AAPI" class="n_sub"><a href="/wiki/%E5%BE%AE%E5%8D%9AAPI">微博API</a></li><li id="n-API.E6.9B.B4.E6.96.B0.E6.97.A5.E5.BF.97" class="n_sub"><a href="/wiki/API%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">API更新日志</a></li><li id="n-.E6.8E.A5.E5.8F.A3.E8.AE.BF.E9.97.AE.E9.A2.91.E6.AC.A1.E6.9D.83.E9.99.90" class="n_sub"><a href="/wiki/%E6%8E%A5%E5%8F%A3%E8%AE%BF%E9%97%AE%E9%A2%91%E6%AC%A1%E6%9D%83%E9%99%90">接口访问频次权限</a></li><li id="n-.E6.96.B0.E7.89.88.E6.8E.A5.E5.8F.A3.E8.BF.81.E7.A7.BB.E6.8C.87.E5.8D.97" class="n_sub"><a href="/wiki/V1_To_V2">新版接口迁移指南</a></li>	</ul>	</li>
+
+<?php
+foreach( $this->tree as $v ) {
+	echo '<li class="n_top ">
+	    <h3 action-type="folder">
+            <a href ="javascript:;"><em class="wiki_icon icon_wkDoc"></em><span class="txt">' . $v['data']['title'] . '</span><em class="nav_arr"></em></a></h3>
+        <ul class="child_list" style="display:none;">';
+
+        foreach( $v['list'] as $v2 ) {
+            echo '<li class="n_sub"><a href="/index/cat/?id=' . $v2['id'] . '">' . $v2['title'] . '</a></li>';
+        }
+        echo '</ul>
+    </li>';
+}
+?>
+
 	<li class="n_top ">
 	<h3 action-type="folder"><a href="/wiki/%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC"><em
 		class="wiki_icon icon_Contact"></em><span class="txt">联系我们</span></a></h3>	</li>

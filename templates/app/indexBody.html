@@ -4,13 +4,17 @@ $list = $this->list;
 <div id="bodyContent" class="wiki_bodyContent">
 
 <div style="display:none" class="js-messagebox" id="mw-js-message"></div>
-<h1 class="firstHeading" id="firstHeading">接口列表</h1>
+<h1 class="firstHeading" id="firstHeading"><?php echo $this->pageTitle; ?></h1>
 <div lang="zh-cn" class="mw-content-ltr" dir="ltr"><h2 class="wiki_title"> <span class="mw-headline">接口列表</span></h2>
 <div class="wiki_kit">
 	<p class="tips_txt">注：这是文档列表</p>
 	<div class="wiki_taglist">
 		<ul class="clearfix">
-			<li><a href="#ididid">接口列表</a></li>
+<?php
+        foreach( $this->catList as $v ) {
+			echo '<li><a href="#catid_' . $v['id'] . '">' . $v['title'] . '</a></li>';
+        }
+?>
 		</ul>
 	</div>
 	<p class="tips_txt">下面为具体接口</p>
@@ -24,18 +28,22 @@ $list = $this->list;
 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="wiki_table">
 <colgroup><col class="tbF1"><col class="tbF2"><col></colgroup>
 <tbody>
-    <tr><th scope="col" colspan="3"><span id="ididid">接口列表</span></th></tr>
 
 <?php
-$c = count($list);
-foreach( $list as $k => $v ) {
-    echo '<tr>';
-    if( $k == 0 ) {
-        echo '<td style="text-align:center;" rowspan="' . $c . '">接口</td>';
+foreach( $list as $tmpCatId => $topv ) {
+    echo '<tr><th scope="col" colspan="3"><span id="catid_' . $this->catList[$tmpCatId]['id'] . '">' . $this->catList[$tmpCatId]['title'] . '</span></th></tr>';
+    foreach( $topv as $readType => $secv ) {
+        $c = count($secv);
+        foreach( $secv as $k => $v ) {
+            echo '<tr>';
+            if( $k == 0 ) {
+                echo '<td style="text-align:center;" rowspan="' . $c . '">' . $readType . '接口</td>';
+            }
+                echo '<td><a title="" href="/index/info/?id='. $v['id'] . '">' . $v['url'] . '</a></td>
+                <td>' . $v['title'] . '</td>
+            </tr>';
+        }
     }
-        echo '<td><a title="" href="/index/info/?id='. $v['id'] . '">' . $v['url'] . '</a></td>
-        <td>' . $v['title'] . '</td>
-    </tr>';
 }
 ?>
 </tbody></table>

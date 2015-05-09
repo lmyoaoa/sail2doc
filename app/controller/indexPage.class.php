@@ -6,6 +6,21 @@
 class IndexPage extends Controller {
     public function __construct() {
         parent::__construct();
+        session_start();
+        $this->assign('isLogin', 0);
+        if( isset($_SESSION['userid']) && isset($_SESSION['username']) && !empty($_SESSION['username']) ) {
+            $username = $_SESSION['username'];
+            $userinfo = UserInterface::getInfo($username);
+            if( !empty($userinfo) && $userinfo['password'] == $_SESSION['userinfo']['password'] ) {
+                $this->userid = $userinfo['id'];
+                $this->username = $userinfo['username'];
+                $this->userinfo = $userinfo;
+                $this->assign('userid', $this->userid);
+                $this->assign('username', $this->username);
+                $this->assign('userinfo', $this->userinfo);
+                $this->assign('isLogin', 1);
+            }
+        }
         $this->tree = CategoryInterface::getTree();
     }
 

@@ -76,21 +76,33 @@
 	                </ul>
 	            </div-->
 	            <!--登录Start-->
-	            <!--div class="pull_right">
+<?php
+if( $this->isLogin ) {
+	            echo '<div class="pull_right">
 	                	                <div class="user_info user_info_mouseover2" >
 					    <div class="user_info_inner" node-type="userinfo_btn">
-					        <img class="user_avatar" width="30" height="30" src="http://tp4.sinaimg.cn/1746820983/50/40012405382/1" alt="小明猪" />
-					        <span class="user_name">小明猪</span>
+					        <!--img class="user_avatar" width="30" height="30" src="http://tp4.sinaimg.cn/1746820983/50/40012405382/1" alt="小明猪" /-->
+					        <span class="user_name">' . $this->username . '</span>
 					        <i class="user_info_arrow"></i>
 					    </div>
 					    <div class="user_handle_layer" node-type="userinfo_menu">
 					        <div class="handle_link_container" >
-					            <div class="handle_link_line"><a class="handle_link" href="/developers/basicinfo" title="">编辑开发者信息</a></div>
-					            <div class="handle_link_line"><a class="handle_link" href="/logout.php?backurl=%2Fwiki%2F2%2Fstatuses%2Frepost%3Fsudaref%3Dopen.weibo.com" title="">退出</a></div>
+					            <div class="handle_link_line"><a class="handle_link" href="/sso/logout" title="">退出</a></div>
 					        </div>
 					    </div>
 					</div>
-	                	            </div-->
+	                	            </div>';
+}else{
+            echo '<div class="pull_right">
+                    <div class="user_info user_info_mouseover2" >
+					    <div class="user_info_inner" node-type="userinfo_btn">
+					        <a href="/sso/login" class="user_name">登录</a>
+					        <i class="user_info_arrow"></i>
+					    </div>
+					</div>
+                </div>';
+}
+?>
 	            <!--登录End-->
 	            <!-- 美国用户logo右边 -->
 	            	        </div>

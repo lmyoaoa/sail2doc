@@ -37,3 +37,14 @@ create table `category` (
     `update_time` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
     primary key(`id`)
 ) ENGINE=Innodb default charset=utf8 comment '分类表';
+
+--用户表
+create table `users` (
+    `id` int(11) not null auto_increment,
+    `username` varchar(30) not null default '' comment '用户名',
+    `password` varchar(64) not null default '' comment '密码',
+    `create_time` int(10) NOT NULL DEFAULT '0' COMMENT '添加时间',
+    `update_time` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+    primary key(`id`)
+) ENGINE=Innodb default charset=utf8 comment '用户表';
+

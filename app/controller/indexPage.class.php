@@ -11,9 +11,9 @@ class IndexPage extends Controller {
 
     //直接输出
     public function indexAction() {
-        $list = DocumentsInterface::getListAll();
+        //$list = DocumentsInterface::getListAll();
         $this->render('index.html', array(
-            'list' => $list,
+            //'list' => $list,
             'tree' => $this->tree,
         ));
     }

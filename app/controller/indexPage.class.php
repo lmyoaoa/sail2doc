@@ -21,7 +21,7 @@ class IndexPage extends Controller {
                 $this->assign('isLogin', 1);
             }
         }
-        $this->tree = CategoryInterface::getTree();
+        $this->tree = $this->assign('tree', CategoryInterface::getTree());
     }
 
     //直接输出

@@ -71,6 +71,26 @@
 </td>
       </tr>
 
+
+      <tr>
+        <th>项目模块</th>
+        <td>
+          <select name='cat_id' id='cat_id' class='form-control'>
+<?php
+if( !empty($this->tree) ) {
+    foreach( $this->tree as $v ) {
+        foreach($v['list'] as $v2 ) {
+            echo '<option value="' . $v2['id'] . '">' . $v['data']['title'] . ' / ' . $v2['title'] . '</option>';
+        }
+    }
+}
+?>
+          </select>
+        </td>
+        <td>
+        </td>
+      </tr>
+
       <tr>
         <th>接口类型</th>
         <td>

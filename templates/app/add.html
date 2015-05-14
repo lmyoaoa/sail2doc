@@ -92,12 +92,20 @@ if( !empty($this->tree) ) {
       </tr>
 
       <tr>
+        <th>读写类型</th>
+        <td>
+            <label><input type="radio" name="read_type" value="读取" checked> 读取</label>
+            <label> | <input type="radio" name="read_type" value="写入"> 写入</label>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      <tr>
         <th>接口类型</th>
         <td>
-          <select name='type' id='type' class='form-control'>
-            <option value='post'>post</option>
-            <option value='get'>GET</option>
-          </select>
+            <label><input type="radio" name="type" value="post" checked> POST</label>
+            <label> | <input type="radio" name="type" value="get"> GET</label>
         </td>
         <td>
         </td>
@@ -106,10 +114,8 @@ if( !empty($this->tree) ) {
       <tr>
         <th>是否需要登录</th>
         <td>
-          <select name='is_login' id='type' class='form-control'>
-            <option value='1'>是</option>
-            <option value='0'>否</option>
-          </select>
+            <label><input type="radio" name="is_login" value="1" checked> 是</label>
+            <label> | <input type="radio" name="is_login" value="0"> 否</label>
         </td>
         <td>
         </td>

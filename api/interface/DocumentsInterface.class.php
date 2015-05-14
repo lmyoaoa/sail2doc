@@ -105,6 +105,8 @@ class DocumentsInterface {
         $array = array(
             'title' => $data['title'],
             'url' => $data['url'],
+            'read_type' => $data['read_type'],
+            'cat_id' => $data['cat_id'],
             'type' => $data['type'],
             'is_login' => $data['is_login'],
             'ret_demo' => $data['desc'],

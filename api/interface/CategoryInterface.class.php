@@ -6,6 +6,18 @@ class CategoryInterface {
 
     protected static $dbs;
 
+    public static function add($data) {
+        $arr = array(
+            'title' => $data['title'],
+            'pid' => $data['pid'],
+            'create_time' => time(),
+            'update_time' => time(),
+        );
+        $mod = new CategoryModel();
+        $id = $mod->add($arr, true);
+        return $id;
+    }
+
     /**
      * @desc 获得所有分类树
      * @author lmyoaoa

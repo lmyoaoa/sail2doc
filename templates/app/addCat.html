@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name="renderer" content="webkit"> 
+  <title>添加文档分类</title>
+<link rel='stylesheet' href='/tmp/zh-cn.default.css?v=7.0' type='text/css' media='screen' />
+<script src="/tmp/jquery.js"></script>
+<style>.mgr-5px{margin-right:5px;}
+#tipsModal {margin-top: 10%;}
+#begin + .input-group-addon {border-left: none; border-right: none;}
+#begin,#end {max-width: 150px; width: auto}
+
+#copyProjectModal {padding: 0}
+#copyProjectModal {padding: 0 2px}
+#copyProjectModal > div {position: relative;}
+#copyProjectModal a {display: block; min-height: 30px; line-height: 30px; padding: 5px 15px; border: 1px solid #e5e5e5; color: #333; margin: 5px 0}
+#copyProjectModal a > i {display: inline-block; margin-right: 5px;}
+#copyProjectModal a:hover {border:1px solid #39B3D7; background-color: #E5F9FF; text-decoration: none}
+#copyProjectModal a.active {border-color: #229F24; color: #229F24; background-color: #E5FFE6}
+#copyProjectModal a.active:after {position: absolute; content: '\e60d'; font-family: ZenIcon; font-size: 20px; right: 25px;}
+#copyProjectModal a.cancel {color: #D2322D}
+
+.modal-dialog {margin-top: 10%!important;}
+.input-group {margin-top:3px;}
+</style><link rel='icon' href='/favicon.ico' type='image/x-icon' />
+<link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+</head>
+<body>
+
+<header id='header'>
+  <div id='topbar'>
+    
+    <h5 id='companyname'>
+      <a href="/">文档首页</a></h5>
+  </div>
+  <nav id='mainmenu'>
+    <ul class='nav'>
+<li ><a href='/'  id='menumy'><i class="icon-home"></i><span>返回首页</span></a></li>
+</ul>
+
+  </nav>
+  <nav id="modulemenu">
+    
+  </nav>
+</header>
+
+<div id='wrap'>
+  <div class='outer'>
+
+
+
+<div class='container mw-1400px'>
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix'><i class='icon-folder-close-alt'></i></span>
+      <strong><small class='text-muted'><i class='icon icon-plus'></i></small> 添加文档分类（顶级分类相当于是一个项目，次之分类为模块，譬如XX项目为顶级分类，则这个项目中的用户模块则作为一个模块，用户相关的API则全部都添加在这个用户分类下）</strong>
+    </div>
+  </div>
+  <form class='form-condensed' method='post' id='dataform'>
+    <table class='table table-form'> 
+
+      <tr>
+        <th>项目模块</th>
+        <td>
+          <select name='pid' id='cat_id' class='form-control'>
+                <option value="0">顶级分类/模块</option>
+<?php
+if( !empty($this->tree) ) {
+    foreach( $this->tree as $v ) {
+        echo '<option value="' . $v['data']['id'] . '">' . $v['data']['title']  . '</option>';
+    }
+}
+?>
+          </select>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      <tr>
+        <th class='w-90px'>分类名称</th>
+        <td class='w-p25-f'><input type='text' name='title' id='title' value='' class='form-control' />
+</td><td></td>
+      </tr>
+
+
+
+
+      <tr>
+        <td></td><td colspan='2' class='text-center'> <button type='submit' id='submit'  class='btn btn-submit btn-primary'>保存</button><a href='javascript:history.go(-1);' class='btn btn-back'  >返回</a></td>
+      </tr>
+    </table>
+  </form>
+</div>
+  </div>  
+    
+</div>
+
+<script>
+function addParam() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">参数</span>\
+            <input type="text" name="param[name][]" value="" class="form-control w-100px form-date" placeholder="参数名" />\
+            <input type="text" name="param[type][]" value="" class="form-control form-date" placeholder="类型" />\
+            <input type="text" name="param[desc][]" value="" class="form-control form-date" placeholder="字段说明" />\
+            <input type="text" name="param[need][]" value="" class="form-control w-100px form-date" placeholder="必填，不写为非必填，必填请写1" />\
+          </div>';
+    $(str).appendTo('#paramsDiv');
+}
+
+function addReturn() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">字段1</span>\
+            <input type="text" name="ret[name][]" value="" class="form-control w-100px form-date" placeholder="字段名" />\
+            <input type="text" name="ret[type][]" value="" class="form-control w-100px form-date" placeholder="字段类型" />\
+            <input type="text" name="ret[desc][]" value="" class="form-control w-100px form-date" placeholder="字段说明" />\
+          </div>';
+    $(str).appendTo('#returnDiv');
+}
+
+function addTable() {
+    var str = '<div class="input-group" data-num="1">\
+            <span class="input-group-addon">数据表</span>\
+            <input type="text" name="table[]" value="" class="form-control w-100px form-date" placeholder="库名表名如：car.car_sale" />\
+          </div>';
+    $(str).appendTo('#returnTable');
+}
+
+</script>
+
+<div id='footer'>
+
+</div>
+
+</body>
+</html>

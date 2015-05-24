@@ -114,6 +114,7 @@ class IndexPage extends Controller {
         }
     }
 
+    //分类下所有接口
     public function catAction() {
         $id = intval($_GET['id']);
         if(!$id) header("Location: /");
@@ -145,4 +146,20 @@ class IndexPage extends Controller {
             'desc' => '页面变量都在这个$this里面',
         ));
     }
+
+    //添加文档分类
+    public function addCatAction() {
+        if( $_POST ) {
+            $data = $_POST;
+            $id = CategoryInterface::add($data);
+            if( $id ) {
+                header("Location: /index/addCat");
+            }
+        }
+        $this->render('addCat.html', array(
+            'test'=>'testPage',
+            'desc'=>'页面变量都在这个$this里面',
+        ));
+    }
+
 }

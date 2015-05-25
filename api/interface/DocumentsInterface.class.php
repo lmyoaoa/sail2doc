@@ -111,10 +111,10 @@ class DocumentsInterface {
             'tables' => json_encode($data['table']),
         );
         if( isset($data['read_type']) ) {
-            $array['read_type'] = $data['read_type'],
+            $array['read_type'] = $data['read_type'];
         }
         if( isset($data['cat_id']) ) {
-            $array['cat_id'] = $data['cat_id'],
+            $array['cat_id'] = $data['cat_id'];
         }
 
         //格式化参数

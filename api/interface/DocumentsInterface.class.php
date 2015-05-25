@@ -105,13 +105,17 @@ class DocumentsInterface {
         $array = array(
             'title' => $data['title'],
             'url' => $data['url'],
-            'read_type' => $data['read_type'],
-            'cat_id' => $data['cat_id'],
             'type' => $data['type'],
             'is_login' => $data['is_login'],
             'ret_demo' => $data['desc'],
             'tables' => json_encode($data['table']),
         );
+        if( isset($data['read_type']) ) {
+            $array['read_type'] = $data['read_type'],
+        }
+        if( isset($data['cat_id']) ) {
+            $array['cat_id'] = $data['cat_id'],
+        }
 
         //格式化参数
         $arr = array();

@@ -108,7 +108,11 @@ class IndexPage extends Controller {
 
             $info = DocumentsInterface::getInfo($id);
             //echo trim($info['url'], '/') . '/access_token/' . $token;
-            $con = Http::post(trim($info['url'], '/') . '/access_token/' . $token, $postData);
+            if( $info['url'] != $info['url2'] ) {
+                $con = Http::post(trim($info['url'], '/') . '/?access_token=' . $token, $postData);
+            }else{
+                $con = Http::post(trim($info['url'], '/') . '/access_token/' . $token, $postData);
+            }
 
             echo $con;
         }

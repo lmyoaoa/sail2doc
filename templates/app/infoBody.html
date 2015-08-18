@@ -53,9 +53,12 @@ echo '
 <h2 class="wiki_title"> <span class="mw-headline">注意事项</span></h2>
 <p>无</p>
 
-
+<?php
+if( $this->isLogin ) {
+?>
 <h2 class="wiki_title"> <span class="mw-headline">调用样例及调试工具</span></h2>
 <p><a rel="nofollow" class="external text" href="/index/test?id=<?php echo $info['id'];?>">API测试工具</a></p>
+<?php } ?>
 
 
 <h2 class="wiki_title"> <span class="">返回结果 </span></h2>
